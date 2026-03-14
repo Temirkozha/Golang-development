@@ -1,0 +1,25 @@
+name: assignment5
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: practice5
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata5:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: on-failure
+
+volumes:
+  pgdata5:
