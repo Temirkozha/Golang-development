@@ -1,0 +1,18 @@
+services:
+  task1:
+    build: .
+    volumes:
+      - .:/app
+    command: go run -race task1/task1.go
+
+  task2:
+    build: .
+    volumes:
+      - .:/app
+    command: go run -race task2/task2.go
+
+  task3:
+    build: .
+    volumes:
+      - .:/app
+    command: go run -race task3/task3.go
