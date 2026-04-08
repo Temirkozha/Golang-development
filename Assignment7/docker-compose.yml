@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: practice7
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    ports:
+      - "8090:8090"
+    environment:
+      - JWT_SECRET=my_super_secret_key
+      - DB_URL=host=db user=user password=password dbname=practice7 port=5432 sslmode=disable
+    depends_on:
+      - db
